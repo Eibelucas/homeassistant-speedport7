@@ -36,11 +36,12 @@ class Speedport7Coordinator(DataUpdateCoordinator[dict]):
         self.last_successful_update: datetime | None = None
 
     async def _async_update_data(self) -> dict:
-        """Fetch router status and device information."""
+        """Fetch router status, device information, and diagnostics."""
         try:
             status = await self.client.async_get_router_status()
             device = await self.client.async_get_device_info()
+            tdg = await self.client.async_get_tdg_content()
         except Speedport7ConnectionError as err:
             raise UpdateFailed("Speedport 7 ist nicht erreichbar") from err
         self.last_successful_update = dt_util.utcnow()
-        return {"status": status, "device": device}
+        return {"status": status, "device": device, "tdg": tdg}

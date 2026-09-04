@@ -38,3 +38,8 @@ class Speedport7Entity(CoordinatorEntity[Speedport7Coordinator]):
     def device(self) -> dict:
         """Current device information payload."""
         return self.coordinator.data.get("device", {}) if self.coordinator.data else {}
+
+    @property
+    def tdg(self) -> dict:
+        """Current local diagnostic summary payload."""
+        return self.coordinator.data.get("tdg", {}) if self.coordinator.data else {}

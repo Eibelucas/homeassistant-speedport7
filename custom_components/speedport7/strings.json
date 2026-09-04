@@ -74,6 +74,12 @@
       "firmware": {
         "name": "Firmware"
       },
+      "wlan_24_devices": {
+        "name": "WLAN-Geräte 2,4 GHz"
+      },
+      "wlan_5_devices": {
+        "name": "WLAN-Geräte 5 GHz"
+      },
       "last_successful_update": {
         "name": "Letzter erfolgreicher Abruf"
       }

@@ -27,6 +27,10 @@ class Speedport7Client:
         """Return the device information payload."""
         return await self._async_get_json("api/getDeviceInfo")
 
+    async def async_get_tdg_content(self) -> dict:
+        """Return the local diagnostic summary payload."""
+        return await self._async_get_json("api/getTDGContent")
+
     async def _async_get_json(self, path: str) -> dict:
         """Fetch one status endpoint and parse its JSON payload."""
         try:

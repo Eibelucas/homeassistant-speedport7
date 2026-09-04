@@ -30,6 +30,8 @@ async def async_setup_entry(
             SpeedportLastRebootSensor(coordinator, entry),
             SpeedportUptimeSensor(coordinator, entry),
             SpeedportFirmwareSensor(coordinator, entry),
+            SpeedportWifi24DevicesSensor(coordinator, entry),
+            SpeedportWifi5DevicesSensor(coordinator, entry),
             SpeedportLastSuccessfulUpdateSensor(coordinator, entry),
         ]
     )
@@ -111,6 +113,42 @@ class SpeedportFirmwareSensor(Speedport7Entity, SensorEntity):
     @property
     def native_value(self) -> str | None:
         return self.device.get("swVersion")
+
+
+class SpeedportWifi24DevicesSensor(Speedport7Entity, SensorEntity):
+    """Number of devices connected to the 2.4 GHz WLAN."""
+
+    _attr_translation_key = "wlan_24_devices"
+    _attr_icon = "mdi:wifi"
+
+    def __init__(self, coordinator: Speedport7Coordinator, entry: ConfigEntry) -> None:
+        super().__init__(coordinator, entry)
+        self._attr_unique_id = f"{entry.entry_id}_wlan_24_devices"
+
+    @property
+    def native_value(self) -> int | None:
+        value = self.tdg.get("wlan24_devices")
+        if isinstance(value, (int, str)) and str(value).isdigit():
+            return int(value)
+        return None
+
+
+class SpeedportWifi5DevicesSensor(Speedport7Entity, SensorEntity):
+    """Number of devices connected to the 5 GHz WLAN."""
+
+    _attr_translation_key = "wlan_5_devices"
+    _attr_icon = "mdi:wifi"
+
+    def __init__(self, coordinator: Speedport7Coordinator, entry: ConfigEntry) -> None:
+        super().__init__(coordinator, entry)
+        self._attr_unique_id = f"{entry.entry_id}_wlan_5_devices"
+
+    @property
+    def native_value(self) -> int | None:
+        value = self.tdg.get("wlan5_devices")
+        if isinstance(value, (int, str)) and str(value).isdigit():
+            return int(value)
+        return None
 
 
 class SpeedportLastSuccessfulUpdateSensor(Speedport7Entity, SensorEntity):
