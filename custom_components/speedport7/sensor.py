@@ -8,6 +8,7 @@ from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.util import dt as dt_util
 
 from .api import parse_reboot_timestamp
 from .const import DOMAIN
@@ -77,7 +78,9 @@ class SpeedportLastRebootSensor(Speedport7Entity, SensorEntity):
 
     @property
     def native_value(self) -> datetime | None:
-        return parse_reboot_timestamp(self.device.get("lastRebootTimeStamp"))
+        if value := parse_reboot_timestamp(self.device.get("lastRebootTimeStamp")):
+            return value.replace(tzinfo=dt_util.DEFAULT_TIME_ZONE)
+        return None
 
 
 class SpeedportUptimeSensor(Speedport7Entity, SensorEntity):
