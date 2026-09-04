@@ -13,7 +13,7 @@ from .coordinator import Speedport7Coordinator
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the integration from a config entry."""
-    session = async_create_clientsession(hass, auto_cleanup=False)
+    session = async_create_clientsession(hass)
     client = Speedport7Client(session, entry.data[CONF_HOST])
     coordinator = Speedport7Coordinator(hass, entry, client)
     await coordinator.async_config_entry_first_refresh()
