@@ -1,0 +1,82 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Speedport 7",
+        "description": "Gib die Adresse deines Speedport 7 an, zum Beispiel speedport.ip oder 192.168.3.1.",
+        "data": {
+          "host": "Router-Adresse"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Der Router ist nicht erreichbar. Prüfe die Adresse.",
+      "unknown": "Unerwarteter Fehler. Details stehen im Protokoll."
+    },
+    "abort": {
+      "already_configured": "Dieser Router ist bereits eingerichtet."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Aktualisierung",
+        "data": {
+          "update_interval": "Aktualisierungsintervall"
+        }
+      }
+    }
+  },
+  "selector": {
+    "update_interval": {
+      "options": {
+        "30": "Alle 30 Sekunden",
+        "60": "Alle 60 Sekunden",
+        "120": "Alle 2 Minuten",
+        "300": "Alle 5 Minuten"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "wlan": {
+        "name": "WLAN"
+      },
+      "internet": {
+        "name": "Internet"
+      },
+      "broadband": {
+        "name": "DSL/Faser"
+      },
+      "lan": {
+        "name": "LAN"
+      },
+      "phone": {
+        "name": "Telefon"
+      },
+      "failover": {
+        "name": "Ausfallschutz (LTE aktiv)"
+      }
+    },
+    "sensor": {
+      "wan_ip": {
+        "name": "WAN-IP"
+      },
+      "ssid": {
+        "name": "SSID"
+      },
+      "last_reboot": {
+        "name": "Letzter Neustart"
+      },
+      "uptime": {
+        "name": "Uptime"
+      },
+      "firmware": {
+        "name": "Firmware"
+      },
+      "last_successful_update": {
+        "name": "Letzter erfolgreicher Abruf"
+      }
+    }
+  }
+}
